@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "crudclients",
+    "name": "crud-clientes",
     "slug": "crud-clientes",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,18 +21,10 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.hchoquey.desafiocrudclientes",
-      "versionCode": 1
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "ad627eb3-ab9a-4ae0-8a97-eacd6515e9bc"
-      }
-    },
-    "owner": "hchoquey"
+    }
   }
 }

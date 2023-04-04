@@ -6,13 +6,25 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "build" : "expo build:android"
   },
   "dependencies": {
+    "@expo/webpack-config": "^18.0.1",
+    "@react-navigation/native": "^6.1.6",
+    "@react-navigation/native-stack": "^6.9.12",
+    "@rneui/base": "github:react-native-elements/react-native-elements#base",
+    "@rneui/themed": "github:react-native-elements/react-native-elements#themed",
     "expo": "~48.0.9",
     "expo-status-bar": "~1.4.4",
+    "firebase": "9.8.3",
     "react": "18.2.0",
-    "react-native": "0.71.4"
+    "react-dom": "18.2.0",
+    "react-native": "0.71.4",
+    "react-native-elements": "^3.4.3",
+    "react-native-picker": "^4.3.7",
+    "react-native-web": "~0.18.10",
+    "tailwind-react-native-classnames": "^1.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
