@@ -11,10 +11,22 @@ import FormLabel from '../atoms/FormLabel'
 
 import ClienteRegistroForm from '../molecules/ClienteRegistroForm'
 
-export default function ClienteDetailScreen(props) {
+
+type User = {
+  id?: string;
+  nombres: string;
+  apellidos: string;
+  dni: string;
+  ciudad: string;
+  anio: string;
+  mes: string;
+  dia: string;
+};
+
+export default function ClienteDetailScreen(props: any) {
 
   let fechaActual = new Date();
-  const initialState = {
+  const initialState:User = {
     nombres:'',
     apellidos: '',
     dni:'',
@@ -28,17 +40,17 @@ export default function ClienteDetailScreen(props) {
 
   const [loading, setLoading] = useState(true);
 
-  const getUserById = async (id) =>{
-    const dbRef = firebase.db.collection('clientes').doc(id)
+  const getUserById = async (id: string) => {
+    const dbRef = firebase.db.collection('clientes').doc(id);
     const doc = await dbRef.get();
-    const user = doc.data();
+    const user = doc.data() as User;
     console.log(user);
     setUser({
       ...user,
-      id: doc.id
+      id: doc.id,
     });
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   useEffect(()=>{
     getUserById(props.route.params.userId)
@@ -56,8 +68,6 @@ export default function ClienteDetailScreen(props) {
   }
 
   const updateUser = async() => {
-    console.log("UPDATE")
-
     if(!user.nombres) alert('Nombre es un campo obligatorio')
     else if (!user.apellidos) alert('Apellidos es un campo obligatorio')
     else if (!user.dni) alert('DNI es un campo obligatorio')
@@ -73,8 +83,9 @@ export default function ClienteDetailScreen(props) {
     else if (!Number.isInteger(Number(user.dni)))alert('Ingresar Correctamente el DNI (28)')
     else if (user.dni.length<8)alert('DNI corresponde a 8 digitos')
     else{
-      fechaSeleccionada = new Date(user.anio+'-'+user.mes+'-'+user.dia);
-      
+      const fechaSeleccionada = new Date(
+        user.anio + '-' + user.mes + '-' + user.dia
+      );
       const diferencia = fechaActual.getTime() - fechaSeleccionada.getTime();
       const edad = Math.floor(diferencia / 3.154e+10);
       if (edad >= 18) {
@@ -219,9 +230,8 @@ export default function ClienteDetailScreen(props) {
           <Button 
             color="#ffa400"
             title="Actualizar Datos"
-            onPress={()=> updateUser()}>
-
-          </Button>
+            onPress={()=> updateUser()}
+            />
         </View>
         
         
@@ -229,9 +239,8 @@ export default function ClienteDetailScreen(props) {
           <Button 
             color="#910048"
             title="Eliminar Cliente"
-            onPress={()=> openConfirmationAlert()}>
+            onPress={()=> openConfirmationAlert()}/>
 
-          </Button>
         </View>
     </ScrollView>
   )

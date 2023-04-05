@@ -5,7 +5,7 @@ import firebase from '../../database/firebase'
 import ClienteRegistro from '../molecules/ClienteRegistro'
 import FormLabel from '../atoms/FormLabel'
 
-export default function CreateClienteScreen(props) {
+export default function CreateClienteScreen(props: any) {
 
   let fechaActual = new Date();
   console.log(fechaActual.toLocaleDateString());
@@ -20,7 +20,7 @@ export default function CreateClienteScreen(props) {
     dia:'',
   })
 
-  const handleChangeText = (dato, value)=>{
+  const handleChangeText = (dato: any, value: any)=>{
     setState({...state,[dato]:value})
   }
 
@@ -42,7 +42,9 @@ export default function CreateClienteScreen(props) {
     else if (!Number.isInteger(Number(state.dni)))alert('Ingresar Correctamente el DNI (28)')
     else if (state.dni.length<8)alert('DNI corresponde a 8 digitos')
     else{
-      fechaSeleccionada = new Date(state.anio+'-'+state.mes+'-'+state.dia);
+      const fechaSeleccionada = new Date(
+        state.anio + '-' + state.mes + '-' + state.dia
+      );
       
       const diferencia = fechaActual.getTime() - fechaSeleccionada.getTime();
       const edad = Math.floor(diferencia / 3.154e+10);
@@ -97,45 +99,41 @@ export default function CreateClienteScreen(props) {
   return (
     <ScrollView style={styles.container}>
       <ClienteRegistro
-        onChangeText={(value)=>handleChangeText('nombres',value)}
+        onChangeText={(value: string)=>handleChangeText('nombres',value)}
         titulo="Nombres(*)"
       />
       <ClienteRegistro
-        onChangeText={(value)=>handleChangeText('apellidos',value)}
+        onChangeText={(value: string)=>handleChangeText('apellidos',value)}
         titulo="Apellidos(*)"
       />
       <ClienteRegistro
-        onChangeText={(value)=>handleChangeText('dni',value)}
+        onChangeText={(value: string)=>handleChangeText('dni', value)}
         titulo="DNI(*)"
       />
       
       <FormLabel text ="Fecha de Nacimiento(*)"/>
       <ClienteRegistro
-        onChangeText={(value)=>handleChangeText('anio',value)}
+        onChangeText={(value: string)=>handleChangeText('anio',value)}
         titulo="Año"
       />
       <ClienteRegistro
-        onChangeText={(value)=>handleChangeText('mes',value)}
+        onChangeText={(value: string)=>handleChangeText('mes',value)}
         titulo="Mes"
       />
       <ClienteRegistro
-        onChangeText={(value)=>handleChangeText('dia',value)}
+        onChangeText={(value: string)=>handleChangeText('dia',value)}
         titulo="Dia"
       />
 
       
       <ClienteRegistro
-        onChangeText={(value)=>handleChangeText('ciudad',value)}
+        onChangeText={(value: string)=>handleChangeText('ciudad',value)}
         titulo="Ciudad"
       />
         
         <View style={styles.inputGroup}>
-          <Button 
-            color="#ffa400"
-            title="Guardar Cliente"
-            onPress={()=> saveNewClient()}>
-
-          </Button>
+          <Button color="#ffa400" title="Guardar Cliente" onPress={()=> saveNewClient()}
+          />
         </View>
     </ScrollView>
   )
